@@ -1,24 +1,7 @@
 #pragma once
-//
+
 //#include <tuple>
 //using namespace std;
-
-// needs:
-// tuple constructors (almost all)
-//   - note: size of tuples must be same anyways
-// make_tuple
-// get
-//   - number get -- all kind of references supported
-//   - type get -- all kind of references supported + compilation error on many types
-//     example:
-//       tuple<int, double, int> x;
-//       get<int>(x); -- compilation error
-//       get<0>(x); -- ok
-// compare operators
-
-// helpers to implement:
-// tuple_element & tuple_element_t -- type helper, gets type of element by it's number
-// tuple_size & tuple_size_v -- gets tuple size
 
 template<typename... Types>
 struct tuple {
