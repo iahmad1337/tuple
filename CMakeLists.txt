@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(template)
+project(tuple-exam)
 
 set(CMAKE_CXX_STANDARD 17)
 
