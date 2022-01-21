@@ -178,3 +178,35 @@ TEST(tuple, compares) {
   EXPECT_LT(a, b);
 }
 
+struct non_default_constructible_t {
+  non_default_constructible_t(int x) {}
+};
+
+static_assert(std::is_default_constructible_v<tuple<int, double>>);
+static_assert(!std::is_default_constructible_v<tuple<int, non_default_constructible_t>>);
+
+// Some implicit conversion tests
+static_assert(std::is_convertible_v<tuple<int, int>, tuple<long long, long long>>);
+static_assert(std::is_convertible_v<tuple<long long, long long>, tuple<int, int>>);
+
+struct copy_constructible_t {
+  copy_constructible_t() {}
+  copy_constructible_t(copy_constructible_t const&) {}
+};
+
+struct move_constructible_t {
+  move_constructible_t(move_constructible_t&&) = default;
+  move_constructible_t& operator=(move_constructible_t&&) = default;
+
+private:
+  move_constructible_t(move_constructible_t const&) = delete;
+  move_constructible_t& operator=(move_constructible_t const&) = delete;
+};
+
+static_assert(std::is_copy_constructible_v<tuple<int, int>>);
+static_assert(std::is_copy_constructible_v<tuple<copy_constructible_t>>);
+static_assert(std::is_copy_assignable_v<tuple<copy_constructible_t>>);
+
+static_assert(!std::is_copy_constructible_v<tuple<move_constructible_t>>);
+static_assert(std::is_move_constructible_v<tuple<move_constructible_t>>);
+static_assert(std::is_move_assignable_v<tuple<move_constructible_t>>);
