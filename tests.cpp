@@ -147,7 +147,6 @@ TEST(tuple, make_tuple_and_tuple_element) {
   int& b = a;
 
   double c = 12;
-  double const& d = c;
   auto x = make_tuple(b, c, moveable_helper());
 
   static_assert(std::is_same_v<tuple_element<0, decltype(x)>::type, int>);

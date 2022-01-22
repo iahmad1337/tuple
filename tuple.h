@@ -6,6 +6,7 @@
 template<typename... Types>
 struct tuple {
   // same types constructors
+  // note: think *when* you need to enable all of them
   constexpr tuple();
   constexpr tuple(const Types&... args);
 
@@ -25,6 +26,7 @@ struct tuple {
 
 // make_tuple -- constructor with auto deducing types
 // note references are dereferenced
+// see cppreference
 template<typename... Types>
 constexpr tuple<VTypes...> make_tuple(Types&&... args);
 
